@@ -8,5 +8,25 @@ package com.labforward.shardedClasses;
 public interface Comparison {	
 	
 	Result compare();
+	
+	public static final class ComparisonFactoryException extends Exception{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ComparisonFactoryException(String message, Throwable cause) {
+			super(message, cause);
+			
+		}
+
+		public ComparisonFactoryException(String message) {
+			super(message);
+			
+		}
+		
+		
+	}
 
 }
