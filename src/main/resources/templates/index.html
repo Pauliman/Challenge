@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>StartPage</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="main">
+		<div id="inputs">
+			<label for="input">Enter a search term:</label> <input id="input"
+				type="text" width="50" />
+		</div>
+		<div id="buttons">
+			<button id="countBtn" type="button">Count</button>
+			<button id="matchBtn" type="button">Match</button>
+		</div>
+		<div id="outputs">
+			<label for="output">Result:</label>
+			<textarea id="output" rows="1" cols="40"></textarea>
+		</div>
+	</div>
+
+	<script>
+var textInput = document.getElementById("input");
+var textOutput = document.getElementById("output");
+var countButton = document.getElementById("countBtn");
+var matchButton = document.getElementById("matchBtn");
+countButton.addEventListener("click", function() { grabAndSend(textInput.value, 0); });
+matchButton.addEventListener("click", function() { grabAndSend(textInput.value, 1); });
+
+function grabAndSend(input, distance) {
+	var request = new XMLHttpRequest();
+	request.open('POST', '/api/ajax/data', true);
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	request.onreadystatechange = function() {
+		if (request.readyState === 4 && request.status === 200) {
+			textOutput.innerHTML='';
+			var data = JSON.parse(request.responseText);
+				for (i = 0; i < data.length; i++) {
+					textOutput.insertAdjacentHTML("beforeend", data[i] + ' ');
+				}
+			} else if(request.status > 400) {
+				textOutput.insertAdjacentHTML("afterbegin", "Something went wrong");
+			}
+		};
+	request.send("word=" + input + "&distance=" + distance);
+}
+
+</script>
+</body>
+
+</html>

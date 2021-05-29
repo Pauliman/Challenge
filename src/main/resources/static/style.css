@@ -1,0 +1,30 @@
+#main {
+	display:flex;
+	border: solid black 2px;
+	width:99vw;
+	height:30vh;
+	flex-flow: column wrap;
+	justify-content: space-around;
+	align-content: center;
+}
+
+#buttons {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-content: center;
+}
+
+#inputs {
+	display:flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-content: center;
+}
+
+#outputs {
+	display:flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-content: center;
+}
